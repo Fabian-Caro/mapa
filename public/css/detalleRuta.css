@@ -1,0 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    /* Light background */
+}
+
+.container {
+    margin-top: 30px;
+}
+
+/* Improved centering and layout */
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#map {
+    width: 100%;
+    /* Adjusted width for responsiveness */
+    height: 500px;
+    /* Fixed height for better visualization */
+}
+
+.route-details {
+    background-color: #fff;
+    /* Clean white background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+}
+
+.route-details h4 {
+    color: #343a40;
+    margin-bottom: 15px;
+}
+
+.route-details p {
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.btn-success,
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 7px;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.btn-success:hover,
+.btn-secondary:hover {
+    transform: translateY(-2px);
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    /* Subtle lift */
+}
+
+.card-title {
+    color: #343a40;
+    font-weight: 600;
+}
+
+.invalid-feedback {
+    display: block;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+/* Modern form styling */
+.form-control {
+    border-radius: 7px;
+    /* Softened corners */
+    border: 1px solid #ced4da;
+    padding: 0.75rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #5cb85c;
+    /* Focused color */
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-label {
+    margin-top: 0.75rem;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}

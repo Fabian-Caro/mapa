@@ -1,0 +1,131 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #2c3e50;
+    /* Dark background for navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: #ffffff !important;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #f39c12 !important;
+}
+
+.container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Custom Search Input */
+.search-container {
+    position: relative;
+}
+
+.search-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #555;
+}
+
+.search-container input {
+    padding-left: 40px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    /* Subtle hover effect */
+    border-radius: 10px;
+    /* Rounded corners */
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    /* Lift the card slightly on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    color: #34495e;
+    /* Darken the title for emphasis */
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    border-color: #2980b9;
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.btn-group .btn {
+    flex: 1;
+    margin: 2px;
+}
+
+.btn-group .btn i {
+    margin-right: 5px;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+}
+
+/* Form input styles */
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+}
+
+/* Footer styles */
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-radius: 0;
+}
+
+/* Card hover effect */
+#vehiculosContainer .card {
+    transition: all 0.3s ease;
+}
+
+#vehiculosContainer .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
