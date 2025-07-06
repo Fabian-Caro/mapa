@@ -1,0 +1,18 @@
+[
+    {
+        "placa": "XXX123",
+        "modelo": "80",
+        "color": "azul",
+        "marca": "chevrolet",
+        "capacidadCarga": "45",
+        "fechaCreacion": "2025-02-10T02:37:15.200Z"
+    },
+    {
+        "placa": "ABC123",
+        "modelo": "2022",
+        "color": "Naranja",
+        "marca": "Toyota",
+        "capacidadCarga": "700",
+        "fechaCreacion": "2025-02-10T19:16:20.080Z"
+    }
+]

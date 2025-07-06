@@ -1,7 +1,7 @@
-const vehiculosModel = require('../models/vehiculosModel');
+const vehiculosModel = require('./vehicleModel');
 
 // Obtener todos los vehículos
-function getAllVehiculos(req, res) {
+function getAllVehicles(req, res) {
     try {
         const vehiculos = vehiculosModel.getVehiculos();
         res.json({ success: true, data: vehiculos });
@@ -26,7 +26,7 @@ function getVehiculoByPlaca(req, res) {
 }
 
 // Crear nuevo vehículo
-function createVehiculo(req, res) {
+function createVehicle(req, res) {
     try {
         const { placa, modelo, color, marca, capacidadCarga } = req.body;
 
@@ -159,9 +159,9 @@ function searchVehiculo(req, res) {
 }
 
 module.exports = {
-    getAllVehiculos,
+    getAllVehicles,
     getVehiculoByPlaca,
-    createVehiculo,
+    createVehicle,
     updateVehiculo,
     deleteVehiculo,
     searchVehiculo

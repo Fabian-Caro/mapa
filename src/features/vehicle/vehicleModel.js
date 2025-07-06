@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const filePath = path.join(__dirname, '../data/vehiculos.json');
+const filePath = path.join(__dirname, 'vehicleData.json');
 
 // Función para crear un nuevo objeto vehículo
 function crearVehiculo(placa, modelo, color, marca, capacidadCarga) {

@@ -34,7 +34,7 @@ function validateForm(formData) {
 
 // Función para obtener y mostrar todos los vehículos
 function fetchVehiculos() {
-    fetch('/api/vehiculos')
+    fetch('/api/vehicle')
         .then(response => {
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
             return response.json();
@@ -94,7 +94,7 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
     // Determinar si se está editando o creando
     const isEditing = form.getAttribute('data-editing') === 'true';
     const method = isEditing ? 'PUT' : 'POST';
-    const url = isEditing ? `/api/vehiculos/${vehiculoData.placa}` : '/api/vehiculos';
+    const url = isEditing ? `/api/vehicle/${vehiculoData.placa}` : '/api/vehicle';
     fetch(url, {
         method: method,
         headers: {

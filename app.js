@@ -9,15 +9,18 @@ app.use(express.urlencoded({ extended: true }));
 
 // Servir archivos estáticos (CSS, JavaScript, imágenes)
 app.use(express.static('public'));
+app.use('/vehicle', express.static(path.join(__dirname, 'src', 'features', 'vehicle')));
 
 // Importar rutas
-const vehiculosRoutes = require('./routes/vehiculosRoutes');
+const vehicleRoutes = require('./src/features/vehicle/vehicleRoutes');
+//const vehiculosRoutes = require('./routes/vehiculosRoutes');
 const conductoresRoutes = require('./routes/conductoresRoutes');
 const rutasRoutes = require('./routes/rutasRoutes');
 const detallesRutaRoutes = require('./routes/detallesRutaRoutes');
 
 // Configurar rutas de la API
-app.use('/api/vehiculos', vehiculosRoutes);
+app.use('/api/vehicle', vehicleRoutes);
+//app.use('/api/vehiculos', vehiculosRoutes);
 app.use('/api/conductores', conductoresRoutes);
 app.use('/api/rutas', rutasRoutes);
 app.use('/api/detalles-ruta', detallesRutaRoutes);
@@ -27,9 +30,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.get('/vehiculos', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'vehiculos', 'index.html'));
+app.get('/vehicle', (req, res) => {
+    res.sendFile(path.join(__dirname, 'src', 'features', 'vehicle', 'index.html'));
 });
+
+// app.get('/vehiculos', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public', 'vehiculos', 'index.html'));
+// });
 
 app.get('/conductores', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'conductores', 'index.html'));
