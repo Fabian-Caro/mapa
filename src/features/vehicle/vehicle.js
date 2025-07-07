@@ -20,12 +20,12 @@ function showAlert(message, type = 'success') {
 
 // Función para validar el formulario de vehículo
 function validateForm(formData) {
-    const placa = formData.get('placa');
+    const plate = formData.get('plate');
     const marca = formData.get('marca');
     const modelo = formData.get('modelo');
     const color = formData.get('color');
     // La capacidad de carga es opcional en este ejemplo.
-    if (!placa || placa.trim() === '') return false;
+    if (!plate || plate.trim() === '') return false;
     if (!marca || marca.trim() === '') return false;
     if (!modelo || modelo.trim() === '') return false;
     if (!color || color.trim() === '') return false;
@@ -64,7 +64,7 @@ function renderVehiculos(vehiculos) {
                 <p class="card-text"><strong>Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
                 <div class="btn-group">
                   <button class="btn btn-outline-info" onclick="showDetailsVehicle('${vehiculo.plate}')"><i class="fas fa-info-circle"></i> Detalles</button>
-                  <button class="btn btn-outline-warning" onclick="editVehiculo('${vehiculo.plate}')"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-outline-warning" onclick="editVehicle('${vehiculo.plate}')"><i class="fas fa-edit"></i> Editar</button>
                   <button class="btn btn-outline-danger" onclick="deleteVehicle('${vehiculo.plate}')"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
               </div>
@@ -84,7 +84,7 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
     if (!validateForm(formData)) return;
 
     const vehiculoData = {
-        placa: formData.get('placa'),
+        plate: formData.get('plate'),
         marca: formData.get('marca'),
         modelo: formData.get('modelo'),
         color: formData.get('color'),
@@ -94,7 +94,7 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
     // Determinar si se está editando o creando
     const isEditing = form.getAttribute('data-editing') === 'true';
     const method = isEditing ? 'PUT' : 'POST';
-    const url = isEditing ? `/api/vehicle/${vehiculoData.placa}` : '/api/vehicle';
+    const url = isEditing ? `/api/vehicle/${vehiculoData.plate}` : '/api/vehicle';
     fetch(url, {
         method: method,
         headers: {
@@ -104,7 +104,7 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
     })
         .then(response => response.json())
         .then(data => {
-            if (data.error) throw new Error(data.error);
+            if (data.error) throw new Error(data.error || 'Error inesperado');
             showAlert(isEditing ? 'Vehículo actualizado correctamente' : 'Vehículo creado exitosamente', 'success');
             fetchVehiculos();
             const modal = bootstrap.Modal.getInstance(document.getElementById('vehiculoModal'));
@@ -118,13 +118,13 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
 });
 
 // Función para editar: carga datos en el formulario y activa modo edición
-function editVehiculo(placa) {
-    fetch(`/api/vehiculos/${placa}`)
+function editVehicle(plate) {
+    fetch(`/api/vehicle/${plate}`)
         .then(response => response.json())
         .then(result => {
             if (result.success) {
                 const vehiculo = result.data;
-                document.querySelector('[name="placa"]').value = vehiculo.placa;
+                document.querySelector('[name="plate"]').value = vehiculo.plate;
                 document.querySelector('[name="marca"]').value = vehiculo.marca;
                 document.querySelector('[name="modelo"]').value = vehiculo.modelo;
                 document.querySelector('[name="color"]').value = vehiculo.color;

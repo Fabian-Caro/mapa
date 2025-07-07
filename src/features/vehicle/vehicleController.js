@@ -14,7 +14,7 @@ function getAll(req, res) {
 function getByPlate(req, res) {
     try {
         const vehiculos = VehicleModel.getAll();
-        const vehiculo = vehiculos.find(vehicle => vehicle.placa === req.params.plate);
+        const vehiculo = vehiculos.find(vehicle => vehicle.plate.toUpperCase() === req.params.plate.toUpperCase());
 
         if (!vehiculo) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado' });
@@ -32,20 +32,20 @@ function create(req, res) {
 
         // Validar datos requeridos
         if (!plate || !modelo || !marca) {
-            return res.status(400).json({ 
-                success: false, 
-                message: "Placa, modelo y marca son requeridos" 
+            return res.status(400).json({
+                success: false,
+                message: "Placa, modelo y marca son requeridos"
             });
         }
 
         // Verificar si ya existe un vehículo con esa placa
         const vehiculos = VehicleModel.getAll();
         const existe = vehiculos.some(vehicle => vehicle.plate === plate);
-        
+
         if (existe) {
-            return res.status(400).json({ 
-                success: false, 
-                message: "Ya existe un vehículo con esa placa" 
+            return res.status(400).json({
+                success: false,
+                message: "Ya existe un vehículo con esa placa"
             });
         }
 
@@ -59,34 +59,34 @@ function create(req, res) {
         );
 
         vehiculos.push(newVehiculo);
-        
+
         if (VehicleModel.save(vehiculos)) {
-            res.status(201).json({ 
-                success: true, 
+            res.status(201).json({
+                success: true,
                 message: "Vehículo creado exitosamente",
-                data: newVehiculo 
+                data: newVehiculo
             });
         } else {
             throw new Error("Error al guardar el vehículo");
         }
     } catch (error) {
         console.error("Error al crear el vehículo:", error);
-        res.status(500).json({ 
-            success: false, 
+        res.status(500).json({
+            success: false,
             message: "Error al crear el vehículo",
-            error: error.message 
+            error: error.message
         });
     }
 }
 
 // Actualizar vehículo
-function updateVehiculo(req, res) {
+function update(req, res) {
     try {
-        const { placa } = req.params;
+        const { plate } = req.params;
         const updateData = req.body;
-        
-        const vehiculos = vehiculosModel.getVehiculos();
-        const index = vehiculos.findIndex(v => v.placa === placa);
+
+        const vehiculos = VehicleModel.getAll();
+        const index = vehiculos.findIndex(vehicle => vehicle.plate === plate);
 
         if (index === -1) {
             return res.status(404).json({ success: false, message: "Vehículo no encontrado" });
@@ -96,10 +96,10 @@ function updateVehiculo(req, res) {
         vehiculos[index] = {
             ...vehiculos[index],
             ...updateData,
-            placa // Mantener la placa original
+            plate // Mantener la placa original
         };
 
-        if (vehiculosModel.saveVehiculos(vehiculos)) {
+        if (VehicleModel.save(vehiculos)) {
             res.json({ success: true, data: vehiculos[index] });
         } else {
             throw new Error("Error al guardar los cambios");
@@ -118,7 +118,7 @@ function deleteVehicle(req, res) {
 
         if (newVehiculos.length === vehiculos.length) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado, fallamos acá' });
-        }   
+        }
 
         if (VehicleModel.save(newVehiculos)) {
             res.json({ success: true, message: 'Vehículo eliminado correctamente' });
@@ -162,7 +162,7 @@ module.exports = {
     getAll,
     getByPlate,
     create,
-    updateVehiculo,
+    update,
     deleteVehicle,
     searchVehiculo
 };

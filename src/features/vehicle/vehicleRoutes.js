@@ -16,9 +16,9 @@ const controller = require('./VehicleController');
 
 // Rutas para vehículos
 router.get('/', controller.getAll);
-router.get('/:placa', controller.getByPlate);
+router.get('/:plate', controller.getByPlate);
 router.post('/', controller.create);
-// router.put('/:placa', updateVehiculo);
+router.put('/:plate', controller.update);
 router.delete('/:plate', controller.deleteVehicle);
 
 module.exports = router;
