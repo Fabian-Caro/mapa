@@ -130,21 +130,21 @@ function deleteVehicle(req, res) {
     }
 }
 
-function searchVehiculo(req, res) {
+function search(req, res) {
     try {
         const { query } = req.query;
         if (!query) {
             return res.status(400).json({ success: false, message: "No se proporcionó el término de búsqueda" });
         }
 
-        const vehiculos = vehiculosModel.getVehiculos();
+        const vehiculos = VehicleModel.getAll();
         const lowerQuery = query.toLowerCase();
 
         // Filtrar vehículos que contengan el término en la placa, marca o modelo (sin distinguir mayúsculas)
-        const filtered = vehiculos.filter(vehiculo =>
-            vehiculo.placa.toLowerCase().includes(lowerQuery) ||
-            vehiculo.marca.toLowerCase().includes(lowerQuery) ||
-            vehiculo.modelo.toLowerCase().includes(lowerQuery)
+        const filtered = vehiculos.filter(vehicle =>
+            vehicle.plate.toLowerCase().includes(lowerQuery) ||
+            vehicle.marca.toLowerCase().includes(lowerQuery) ||
+            vehicle.modelo.toLowerCase().includes(lowerQuery)
         );
 
         if (filtered.length > 0) {
@@ -164,5 +164,5 @@ module.exports = {
     create,
     update,
     deleteVehicle,
-    searchVehiculo
+    search
 };

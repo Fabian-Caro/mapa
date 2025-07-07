@@ -201,7 +201,7 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
         return;
     }
     // Se asume que en el backend existe un endpoint de búsqueda que acepte el parámetro "query"
-    fetch(`/api/vehiculos/search?query=${encodeURIComponent(searchTerm)}`)
+    fetch(`/api/vehicle/search?query=${encodeURIComponent(searchTerm)}`)
         .then(response => response.json())
         .then(result => {
             if (result.success) {
