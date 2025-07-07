@@ -1,0 +1,34 @@
+[
+  {
+    "plate": "XXX123",
+    "brand": "Nissan",
+    "model": "88",
+    "color": "Azul",
+    "loadCapacity": "50",
+    "createdAt": "2025-02-10T02:37:15.200Z"
+  },
+  {
+    "plate": "ABC123",
+    "brand": "Toyota",
+    "model": "2022",
+    "color": "Naranja",
+    "loadCapacity": "500",
+    "createdAt": "2025-02-10T19:16:20.080Z"
+  },
+  {
+    "plate": "KQJ123",
+    "brand": "Mazda",
+    "model": "5",
+    "color": "Rojo",
+    "loadCapacity": "100",
+    "createdAt": "2025-07-07T01:36:32.965Z"
+  },
+  {
+    "plate": "ZCF756",
+    "brand": "Mitsubishi",
+    "model": "Lancer",
+    "color": "Plateado",
+    "loadCapacity": "50",
+    "createdAt": "2025-07-07T03:39:04.922Z"
+  }
+]

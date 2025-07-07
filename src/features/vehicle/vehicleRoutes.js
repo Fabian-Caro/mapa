@@ -9,7 +9,7 @@ const router = express.Router();
 //     searchVehiculo  // Importa la función de búsqueda
 // } = require('../../../controller/vehiculosController');
 
-const controller = require('./VehicleController');
+const controller = require('./vehicleController');
 router.get('/count', controller.getCount);
 // Agrega el endpoint de búsqueda antes de la ruta dinámica
 router.get('/search', controller.search);

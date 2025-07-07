@@ -1,10 +1,10 @@
-const VehicleModel = require('./VehicleModel');
+const VehicleModel = require('./vehicleModel');
 
 // Obtener todos los vehículos
 function getAll(req, res) {
     try {
-        const vehiculos = VehicleModel.getAll();
-        res.json({ success: true, data: vehiculos });
+        const vehicles = VehicleModel.getAll();
+        res.json({ success: true, data: vehicles });
     } catch (error) {
         res.status(500).json({ success: false, message: "Error al obtener los vehículos" });
     }
@@ -13,8 +13,8 @@ function getAll(req, res) {
 // Obtener vehículo por placa
 function getByPlate(req, res) {
     try {
-        const vehiculos = VehicleModel.getAll();
-        const vehiculo = vehiculos.find(vehicle => vehicle.plate.toUpperCase() === req.params.plate.toUpperCase());
+        const vehicles = VehicleModel.getAll();
+        const vehiculo = vehicles.find(vehicle => vehicle.plate.toUpperCase() === req.params.plate.toUpperCase());
 
         if (!vehiculo) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado' });
