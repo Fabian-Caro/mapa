@@ -11,10 +11,10 @@ function getAll(req, res) {
 }
 
 // Obtener vehículo por placa
-function getVehiculoByPlaca(req, res) {
+function getByPlate(req, res) {
     try {
-        const vehiculos = vehiculosModel.getVehiculos();
-        const vehiculo = vehiculos.find(v => v.placa === req.params.placa);
+        const vehiculos = VehicleModel.getAll();
+        const vehiculo = vehiculos.find(vehicle => vehicle.placa === req.params.plate);
 
         if (!vehiculo) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado' });
@@ -160,7 +160,7 @@ function searchVehiculo(req, res) {
 
 module.exports = {
     getAll,
-    getVehiculoByPlaca,
+    getByPlate,
     create,
     updateVehiculo,
     deleteVehicle,

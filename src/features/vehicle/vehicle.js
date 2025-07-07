@@ -63,8 +63,8 @@ function renderVehiculos(vehiculos) {
                 <p class="card-text"><strong>Color:</strong> ${vehiculo.color}</p>
                 <p class="card-text"><strong>Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
                 <div class="btn-group">
-                  <button class="btn btn-outline-info" onclick="showVehiculoDetails('${vehiculo.placa}')"><i class="fas fa-info-circle"></i> Detalles</button>
-                  <button class="btn btn-outline-warning" onclick="editVehiculo('${vehiculo.placa}')"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-outline-info" onclick="showDetailsVehicle('${vehiculo.plate}')"><i class="fas fa-info-circle"></i> Detalles</button>
+                  <button class="btn btn-outline-warning" onclick="editVehiculo('${vehiculo.plate}')"><i class="fas fa-edit"></i> Editar</button>
                   <button class="btn btn-outline-danger" onclick="deleteVehicle('${vehiculo.plate}')"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
               </div>
@@ -169,8 +169,8 @@ function deleteVehicle(plate) {
 }
 
 // Función para mostrar detalles del vehículo
-function showVehiculoDetails(placa) {
-    fetch(`/api/vehiculos/${placa}`)
+function showDetailsVehicle(plate) {
+    fetch(`/api/vehicle/${plate}`)
         .then(response => response.json())
         .then(result => {
             if (result.success) {
@@ -180,7 +180,7 @@ function showVehiculoDetails(placa) {
               <div class="row">
                 <div class="col-md-6">
                   <h4><i class="fas fa-truck"></i> ${vehiculo.marca} ${vehiculo.modelo}</h4>
-                  <p><strong><i class="fas fa-id-card"></i> Placa:</strong> ${vehiculo.placa}</p>
+                  <p><strong><i class="fas fa-id-card"></i> Placa:</strong> ${vehiculo.plate}</p>
                   <p><strong><i class="fas fa-palette"></i> Color:</strong> ${vehiculo.color}</p>
                   <p><strong><i class="fas fa-truck-loading"></i> Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
                 </div>
