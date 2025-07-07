@@ -14,12 +14,12 @@ function getAll(req, res) {
 function getByPlate(req, res) {
     try {
         const vehicles = VehicleModel.getAll();
-        const vehiculo = vehicles.find(vehicle => vehicle.plate.toUpperCase() === req.params.plate.toUpperCase());
+        const vehicle = vehicles.find(vehicle => vehicle.plate.toUpperCase() === req.params.plate.toUpperCase());
 
-        if (!vehiculo) {
+        if (!vehicle) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado' });
         }
-        res.json({ success: true, data: vehiculo });
+        res.json({ success: true, data: vehicle });
     } catch (error) {
         res.status(500).json({ success: false, message: "Error al obtener el vehículo" });
     }
@@ -28,10 +28,10 @@ function getByPlate(req, res) {
 // Crear nuevo vehículo
 function create(req, res) {
     try {
-        const { plate, modelo, color, marca, capacidadCarga } = req.body;
+        const { plate, brand, model, color, loadCapacity } = req.body;
 
         // Validar datos requeridos
-        if (!plate || !modelo || !marca) {
+        if (!plate || !brand || !model) {
             return res.status(400).json({
                 success: false,
                 message: "Placa, modelo y marca son requeridos"
@@ -39,10 +39,10 @@ function create(req, res) {
         }
 
         // Verificar si ya existe un vehículo con esa placa
-        const vehiculos = VehicleModel.getAll();
-        const existe = vehiculos.some(vehicle => vehicle.plate === plate);
+        const vehicles = VehicleModel.getAll();
+        const exists = vehicles.some(vehicle => vehicle.plate === plate);
 
-        if (existe) {
+        if (exists) {
             return res.status(400).json({
                 success: false,
                 message: "Ya existe un vehículo con esa placa"
@@ -50,21 +50,21 @@ function create(req, res) {
         }
 
         // Crear nuevo vehículo
-        const newVehiculo = VehicleModel.create(
+        const newVehicle = VehicleModel.create(
             plate,
-            modelo,
+            brand,
+            model,
             color,
-            marca,
-            capacidadCarga
+            loadCapacity
         );
 
-        vehiculos.push(newVehiculo);
+        vehicles.push(newVehicle);
 
-        if (VehicleModel.save(vehiculos)) {
+        if (VehicleModel.save(vehicles)) {
             res.status(201).json({
                 success: true,
                 message: "Vehículo creado exitosamente",
-                data: newVehiculo
+                data: newVehicle
             });
         } else {
             throw new Error("Error al guardar el vehículo");
@@ -85,22 +85,22 @@ function update(req, res) {
         const { plate } = req.params;
         const updateData = req.body;
 
-        const vehiculos = VehicleModel.getAll();
-        const index = vehiculos.findIndex(vehicle => vehicle.plate === plate);
+        const vehicles = VehicleModel.getAll();
+        const index = vehicles.findIndex(vehicle => vehicle.plate === plate);
 
         if (index === -1) {
             return res.status(404).json({ success: false, message: "Vehículo no encontrado" });
         }
 
         // Actualizar solo los campos proporcionados
-        vehiculos[index] = {
-            ...vehiculos[index],
+        vehicles[index] = {
+            ...vehicles[index],
             ...updateData,
             plate // Mantener la placa original
         };
 
-        if (VehicleModel.save(vehiculos)) {
-            res.json({ success: true, data: vehiculos[index] });
+        if (VehicleModel.save(vehicles)) {
+            res.json({ success: true, data: vehicles[index] });
         } else {
             throw new Error("Error al guardar los cambios");
         }
@@ -113,14 +113,14 @@ function update(req, res) {
 function deleteVehicle(req, res) {
     try {
         const { plate } = req.params;
-        const vehiculos = VehicleModel.getAll();
-        const newVehiculos = vehiculos.filter(vehicle => vehicle.plate.toUpperCase() !== plate.toUpperCase());
+        const vehicles = VehicleModel.getAll();
+        const newVehicles = vehicles.filter(vehicle => vehicle.plate.toUpperCase() !== plate.toUpperCase());
 
-        if (newVehiculos.length === vehiculos.length) {
+        if (newVehicles.length === vehicles.length) {
             return res.status(404).json({ success: false, message: 'Vehículo no encontrado, fallamos acá' });
         }
 
-        if (VehicleModel.save(newVehiculos)) {
+        if (VehicleModel.save(newVehicles)) {
             res.json({ success: true, message: 'Vehículo eliminado correctamente' });
         } else {
             throw new Error("Error al eliminar el vehículo");
@@ -137,14 +137,14 @@ function search(req, res) {
             return res.status(400).json({ success: false, message: "No se proporcionó el término de búsqueda" });
         }
 
-        const vehiculos = VehicleModel.getAll();
+        const vehicles = VehicleModel.getAll();
         const lowerQuery = query.toLowerCase();
 
         // Filtrar vehículos que contengan el término en la placa, marca o modelo (sin distinguir mayúsculas)
-        const filtered = vehiculos.filter(vehicle =>
+        const filtered = vehicles.filter(vehicle =>
             vehicle.plate.toLowerCase().includes(lowerQuery) ||
-            vehicle.marca.toLowerCase().includes(lowerQuery) ||
-            vehicle.modelo.toLowerCase().includes(lowerQuery)
+            vehicle.brand.toLowerCase().includes(lowerQuery) ||
+            vehicle.model.toLowerCase().includes(lowerQuery)
         );
 
         if (filtered.length > 0) {

@@ -1,38 +1,14 @@
-body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.navbar {
-    background-color: #2c3e50;
-    /* Dark background for navbar */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-brand {
-    color: #ffffff !important;
-    font-weight: bold;
-}
-
-.navbar-brand:hover {
-    color: #ffffff !important;
-}
-
-.nav-link {
-    color: #ffffff !important;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #f39c12 !important;
-}
-
+/* ===========================================
+   Container spacing
+=========================================== */
 .container {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
 
-/* Custom Search Input */
+/* ===========================================
+   Custom Search Input with icon
+=========================================== */
 .search-container {
     position: relative;
 }
@@ -49,36 +25,47 @@ body {
     padding-left: 40px;
 }
 
+/* ===========================================
+   Card styles
+=========================================== */
 .card {
     margin-bottom: 20px;
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
-    /* Subtle hover effect */
-    border-radius: 10px;
-    /* Rounded corners */
+    border-radius: var(--border-radius); /* Rounded corners */
     overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-7px);
-    /* Lift the card slightly on hover */
+    transform: translateY(-7px); /* Slight lift on hover */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Specific hover effect for cards inside #vehiculosContainer */
+#vehiculosContainer .card {
+    transition: all 0.3s ease;
+}
+
+#vehiculosContainer .card:hover {
+    transform: scale(1.03); /* Subtle zoom on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Card title styling */
 .card-title {
     color: #34495e;
-    /* Darken the title for emphasis */
     margin-bottom: 0.75rem;
     font-weight: 600;
 }
 
-/* Button styles */
+/* ===========================================
+   Button styles
+=========================================== */
 .btn-primary {
     background-color: #3498db;
     border-color: #3498db;
-    transition: background-color 0.3s ease;
-    /* Smooth transition for hover effect */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
 }
 
 .btn-primary:hover {
@@ -86,6 +73,7 @@ body {
     border-color: #2980b9;
 }
 
+/* Full-width button group */
 .btn-group {
     width: 100%;
 }
@@ -99,18 +87,24 @@ body {
     margin-right: 5px;
 }
 
-/* Modal styles */
+/* ===========================================
+   Modal styles
+=========================================== */
 .modal-content {
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 
-/* Form input styles */
+/* ===========================================
+   Form input focus state
+=========================================== */
 .form-control:focus {
     border-color: #3498db;
     box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
 }
 
-/* Footer styles */
+/* ===========================================
+   Footer styles
+=========================================== */
 .footer {
     background-color: #2c3e50;
     color: white;
@@ -118,14 +112,4 @@ body {
     padding: 1rem 0;
     margin-top: 2rem;
     border-radius: 0;
-}
-
-/* Card hover effect */
-#vehiculosContainer .card {
-    transition: all 0.3s ease;
-}
-
-#vehiculosContainer .card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }

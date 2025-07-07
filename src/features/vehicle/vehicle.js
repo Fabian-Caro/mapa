@@ -21,19 +21,19 @@ function showAlert(message, type = 'success') {
 // Función para validar el formulario de vehículo
 function validateForm(formData) {
     const plate = formData.get('plate');
-    const marca = formData.get('marca');
-    const modelo = formData.get('modelo');
+    const brand = formData.get('brand');
+    const model = formData.get('model');
     const color = formData.get('color');
     // La capacidad de carga es opcional en este ejemplo.
     if (!plate || plate.trim() === '') return false;
-    if (!marca || marca.trim() === '') return false;
-    if (!modelo || modelo.trim() === '') return false;
+    if (!brand || brand.trim() === '') return false;
+    if (!model || model.trim() === '') return false;
     if (!color || color.trim() === '') return false;
     return true;
 }
 
 // Función para obtener y mostrar todos los vehículos
-function fetchVehiculos() {
+function fetchVehicles() {
     fetch('/api/vehicle')
         .then(response => {
             if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
@@ -41,7 +41,7 @@ function fetchVehiculos() {
         })
         .then(result => {
             if (result.success) {
-                renderVehiculos(result.data);
+                renderVehicles(result.data);
             } else {
                 throw new Error('Error en la respuesta de la API');
             }
@@ -50,22 +50,22 @@ function fetchVehiculos() {
 }
 
 // Función para renderizar las tarjetas de vehículos
-function renderVehiculos(vehiculos) {
+function renderVehicles(vehicles) {
     const container = document.getElementById('vehiculosContainer');
     container.innerHTML = '';
-    vehiculos.forEach(vehiculo => {
+    vehicles.forEach(vehicle => {
         const card = `
           <div class="col-md-4">
             <div class="card mb-4">
               <div class="card-body">
-                <h5 class="card-title"><i class="fas fa-truck"></i> ${vehiculo.marca} ${vehiculo.modelo}</h5>
-                <p class="card-text"><strong>Placa:</strong> ${vehiculo.plate}</p>
-                <p class="card-text"><strong>Color:</strong> ${vehiculo.color}</p>
-                <p class="card-text"><strong>Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
+                <h5 class="card-title"><i class="fas fa-truck"></i> ${vehicle.brand} ${vehicle.model}</h5>
+                <p class="card-text"><strong>Placa:</strong> ${vehicle.plate}</p>
+                <p class="card-text"><strong>Color:</strong> ${vehicle.color}</p>
+                <p class="card-text"><strong>Capacidad de Carga:</strong> ${vehicle.loadCapacity || 'N/D'}</p>
                 <div class="btn-group">
-                  <button class="btn btn-outline-info" onclick="showDetailsVehicle('${vehiculo.plate}')"><i class="fas fa-info-circle"></i> Detalles</button>
-                  <button class="btn btn-outline-warning" onclick="editVehicle('${vehiculo.plate}')"><i class="fas fa-edit"></i> Editar</button>
-                  <button class="btn btn-outline-danger" onclick="deleteVehicle('${vehiculo.plate}')"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn btn-outline-info" onclick="showDetailsVehicle('${vehicle.plate}')"><i class="fas fa-info-circle"></i> Detalles</button>
+                  <button class="btn btn-outline-warning" onclick="editVehicle('${vehicle.plate}')"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-outline-danger" onclick="deleteVehicle('${vehicle.plate}')"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
               </div>
             </div>
@@ -83,30 +83,30 @@ document.getElementById('vehiculoForm').addEventListener('submit', function (e) 
     const formData = new FormData(form);
     if (!validateForm(formData)) return;
 
-    const vehiculoData = {
+    const vehicleData = {
         plate: formData.get('plate'),
-        marca: formData.get('marca'),
-        modelo: formData.get('modelo'),
+        brand: formData.get('brand'),
+        model: formData.get('model'),
         color: formData.get('color'),
-        capacidadCarga: formData.get('capacidadCarga')
+        loadCapacity: formData.get('loadCapacity')
     };
 
     // Determinar si se está editando o creando
     const isEditing = form.getAttribute('data-editing') === 'true';
     const method = isEditing ? 'PUT' : 'POST';
-    const url = isEditing ? `/api/vehicle/${vehiculoData.plate}` : '/api/vehicle';
+    const url = isEditing ? `/api/vehicle/${vehicleData.plate}` : '/api/vehicle';
     fetch(url, {
         method: method,
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(vehiculoData)
+        body: JSON.stringify(vehicleData)
     })
         .then(response => response.json())
         .then(data => {
             if (data.error) throw new Error(data.error || 'Error inesperado');
             showAlert(isEditing ? 'Vehículo actualizado correctamente' : 'Vehículo creado exitosamente', 'success');
-            fetchVehiculos();
+            fetchVehicles();
             const modal = bootstrap.Modal.getInstance(document.getElementById('vehiculoModal'));
             modal.hide();
             form.reset();
@@ -123,12 +123,12 @@ function editVehicle(plate) {
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                const vehiculo = result.data;
-                document.querySelector('[name="plate"]').value = vehiculo.plate;
-                document.querySelector('[name="marca"]').value = vehiculo.marca;
-                document.querySelector('[name="modelo"]').value = vehiculo.modelo;
-                document.querySelector('[name="color"]').value = vehiculo.color;
-                document.querySelector('[name="capacidadCarga"]').value = vehiculo.capacidadCarga;
+                const vehicle = result.data;
+                document.querySelector('[name="plate"]').value = vehicle.plate;
+                document.querySelector('[name="brand"]').value = vehicle.brand;
+                document.querySelector('[name="model"]').value = vehicle.model;
+                document.querySelector('[name="color"]').value = vehicle.color;
+                document.querySelector('[name="loadCapacity"]').value = vehicle.loadCapacity;
                 document.getElementById('modalTitle').textContent = 'Editar Vehículo';
                 document.getElementById('vehiculoForm').setAttribute('data-editing', 'true');
                 new bootstrap.Modal(document.getElementById('vehiculoModal')).show();
@@ -158,7 +158,7 @@ function deleteVehicle(plate) {
                 .then(response => {
                     if (response.ok) {
                         showAlert('Vehículo eliminado correctamente', 'success');
-                        fetchVehiculos();
+                        fetchVehicles();
                     } else {
                         showAlert('Error al eliminar el vehículo', 'error');
                     }
@@ -174,15 +174,15 @@ function showDetailsVehicle(plate) {
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                const vehiculo = result.data;
+                const vehicle = result.data;
                 const detailsBody = document.getElementById('vehiculoDetailsBody');
                 detailsBody.innerHTML = `
               <div class="row">
                 <div class="col-md-6">
-                  <h4><i class="fas fa-truck"></i> ${vehiculo.marca} ${vehiculo.modelo}</h4>
-                  <p><strong><i class="fas fa-id-card"></i> Placa:</strong> ${vehiculo.plate}</p>
-                  <p><strong><i class="fas fa-palette"></i> Color:</strong> ${vehiculo.color}</p>
-                  <p><strong><i class="fas fa-truck-loading"></i> Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
+                  <h4><i class="fas fa-truck"></i> ${vehicle.brand} ${vehicle.model}</h4>
+                  <p><strong><i class="fas fa-id-card"></i> Placa:</strong> ${vehicle.plate}</p>
+                  <p><strong><i class="fas fa-palette"></i> Color:</strong> ${vehicle.color}</p>
+                  <p><strong><i class="fas fa-truck-loading"></i> Capacidad de Carga:</strong> ${vehicle.loadCapacity || 'N/D'}</p>
                 </div>
               </div>`;
                 new bootstrap.Modal(document.getElementById('detailsModal')).show();
@@ -197,7 +197,7 @@ function showDetailsVehicle(plate) {
 document.getElementById('searchInput').addEventListener('input', function (e) {
     const searchTerm = e.target.value.trim();
     if (searchTerm.length === 0) {
-        fetchVehiculos();
+        fetchVehicles();
         return;
     }
     // Se asume que en el backend existe un endpoint de búsqueda que acepte el parámetro "query"
@@ -205,7 +205,7 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
         .then(response => response.json())
         .then(result => {
             if (result.success) {
-                renderVehiculos(result.data);
+                renderVehicles(result.data);
             } else {
                 showAlert(result.message, 'danger');
                 document.getElementById('vehiculosContainer').innerHTML = '';
@@ -225,5 +225,5 @@ document.getElementById('vehiculoModal').addEventListener('hidden.bs.modal', fun
 
 document.addEventListener('DOMContentLoaded', () => {
     Components.init(); // carga header y footer
-    fetchVehiculos();  // carga inicial de vehículos
+    fetchVehicles();  // carga inicial de vehículos
 });

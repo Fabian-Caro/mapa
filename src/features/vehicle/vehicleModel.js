@@ -4,14 +4,14 @@ const path = require('path');
 const filePath = path.join(__dirname, 'vehicleData.json');
 
 // Función para crear un nuevo objeto vehículo
-function create(plate, modelo, color, marca, capacidadCarga) {
+function create(plate, brand, model, color, loadCapacity) {
     return {
         plate,
-        modelo,
+        brand,
+        model,
         color,
-        marca,
-        capacidadCarga,
-        fechaCreacion: new Date().toISOString()
+        loadCapacity,
+        createdAt: new Date().toISOString()
     };
 }
 
