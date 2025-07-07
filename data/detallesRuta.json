@@ -26,19 +26,28 @@
   {
     "id": 4,
     "rutaId": "3",
-    "latitud": "4.666600",
-    "longitud": "-74.064780",
-    "direccion": "Tejo",
-    "numeroPaquete": "1000",
-    "fechaCreacion": "2025-02-10T21:56:49.003Z"
+    "latitud": "4.608906",
+    "longitud": "-74.090064",
+    "direccion": "Carrera 25a #11 - 55",
+    "numeroPaquete": "XXXXX Dragón",
+    "fechaCreacion": "2025-07-07T20:05:57.457Z"
   },
   {
     "id": 5,
     "rutaId": "3",
-    "latitud": "4.750412",
-    "longitud": "-74.047876",
-    "direccion": "X",
-    "numeroPaquete": "1001",
-    "fechaCreacion": "2025-02-10T21:59:08.215Z"
+    "latitud": "4.656169",
+    "longitud": "-74.09095",
+    "direccion": "Avenida Carrera 60, Teusaquillo, 11132",
+    "numeroPaquete": "XXXXXXX Libre",
+    "fechaCreacion": "2025-07-07T20:09:30.940Z"
+  },
+  {
+    "id": 6,
+    "rutaId": "4",
+    "latitud": "4.656169",
+    "longitud": "-74.09095",
+    "direccion": "Avenida Carrera 60, Teusaquillo, 11132",
+    "numeroPaquete": "1",
+    "fechaCreacion": "2025-07-07T20:26:09.548Z"
   }
 ]

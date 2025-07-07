@@ -1,18 +1,26 @@
 [
   {
-    "placa": "XXX123",
-    "modelo": "80",
-    "color": "azul",
-    "marca": "chevrolet",
-    "capacidadCarga": "45",
-    "fechaCreacion": "2025-02-10T02:37:15.200Z"
-  },
-  {
     "placa": "ABC123",
     "modelo": "2022",
     "color": "Naranja",
     "marca": "Toyota",
     "capacidadCarga": "700",
     "fechaCreacion": "2025-02-10T19:16:20.080Z"
+  },
+  {
+    "placa": "KQJ123",
+    "modelo": "5-2025",
+    "color": "Verde",
+    "marca": "Mazda",
+    "capacidadCarga": "100",
+    "fechaCreacion": "2025-07-07T20:01:45.482Z"
+  },
+  {
+    "placa": "ZXV987",
+    "modelo": "Lancer",
+    "color": "Plateado",
+    "marca": "Mitsubishi",
+    "capacidadCarga": "100",
+    "fechaCreacion": "2025-07-07T20:22:48.644Z"
   }
 ]

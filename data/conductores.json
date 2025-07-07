@@ -34,30 +34,12 @@
     "fechaCreacion": "2025-02-10T06:42:46.834Z"
   },
   {
-    "id": "5",
-    "nombres": "Andres",
-    "apellidos": "Péreza",
-    "numeroLicencia": "ABC-123",
-    "telefono": "555-1234",
-    "correo": "juan.perez@example.com",
-    "fechaCreacion": "2025-02-10T07:04:05.743Z"
-  },
-  {
-    "id": "6",
-    "nombres": "Andres",
-    "apellidos": "Pérez",
-    "numeroLicencia": "ABC-123",
-    "telefono": "555-1234",
-    "correo": "juan.perez@example.com",
-    "fechaCreacion": "2025-02-10T07:43:41.612Z"
-  },
-  {
-    "id": "7",
-    "nombres": "Daniela",
-    "apellidos": "Pineda ",
-    "numeroLicencia": "ABC-555",
-    "telefono": "31253496666",
-    "correo": "kevin@gmail.com",
-    "fechaCreacion": "2025-02-10T07:45:20.079Z"
+    "id": "1002721806",
+    "nombres": "Fabian",
+    "apellidos": "Caro",
+    "numeroLicencia": "6081272001",
+    "telefono": "3219874566",
+    "correo": "fmcaror@udistrital.edu.co",
+    "fechaCreacion": "2025-07-07T20:23:33.391Z"
   }
 ]

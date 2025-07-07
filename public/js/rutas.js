@@ -185,7 +185,7 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
     // Asume que hay un endpoint de búsqueda que maneja los parámetros
     const queryString = `?query=${encodeURIComponent(searchTerm)}`;
     fetch(`/api/rutas/search${queryString}`)
-        .then(response => response.json())
+        .then(response => response.json())  
         .then(result => {
             if (result.success) {
                 renderRutas(result.data);

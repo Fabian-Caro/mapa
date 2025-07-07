@@ -100,28 +100,35 @@ function deleteRuta(req, res) {
 }
 
 // Buscar rutas (por conductor, vehículo, fecha, e incluso por ID si se desea)
+// Buscar rutas (por conductor, vehículo, fecha, e incluso por ID si se desea)
 function searchRutas(req, res) {
     try {
         const rutas = rutasModel.getRutas();
         let resultados = rutas;
 
-        // Filtrar por cada campo si se proporciona
-        if (req.query.conductor) {
-            resultados = resultados.filter(r => r.conductor.toLowerCase().includes(req.query.conductor.toLowerCase()));
-        }
-        if (req.query.vehiculo) {
-            resultados = resultados.filter(r => r.vehiculo.toLowerCase().includes(req.query.vehiculo.toLowerCase()));
-        }
-        if (req.query.fecha) {
-            resultados = resultados.filter(r => r.fecha === req.query.fecha);
-        }
-        // También se puede buscar por ID (opcional)
-        if (req.query.id) {
-            resultados = resultados.filter(r => String(r.id) === String(req.query.id));
+        const { query } = req.query; // <--- Captura el parámetro 'query'
+        if (!query) {
+            // Si no hay término de búsqueda, devuelve todas las rutas o un mensaje
+            return res.json({ success: true, data: rutas });
         }
 
-        res.json({ success: true, data: resultados });
+        const lowerQuery = query.toLowerCase();
+
+        // Filtrar rutas que contengan el término en conductor, vehículo, fecha o ID
+        resultados = rutas.filter(ruta =>
+            ruta.conductor.toLowerCase().includes(lowerQuery) ||
+            ruta.vehiculo.toLowerCase().includes(lowerQuery) ||
+            (ruta.fecha && ruta.fecha.toLowerCase().includes(lowerQuery)) || // Asegúrate de que fecha sea string si no siempre lo es
+            String(ruta.id).toLowerCase().includes(lowerQuery)
+        );
+
+        if (resultados.length > 0) {
+            res.json({ success: true, data: resultados });
+        } else {
+            res.json({ success: false, message: "No se encontraron rutas que coincidan con su búsqueda." });
+        }
     } catch (error) {
+        console.error("Error en la búsqueda de rutas:", error);
         res.status(500).json({ success: false, message: "Error en la búsqueda de rutas", error: error.message });
     }
 }

@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const rutasController = require('../controller/rutasController');
 
+// Buscar rutas (por conductor, vehículo, fecha)
+router.get('/search', rutasController.searchRutas);
+
 // Obtener todas las rutas
 router.get('/', rutasController.getAllRutas);
 
@@ -16,8 +19,5 @@ router.put('/:id', rutasController.updateRuta);
 
 // Eliminar ruta
 router.delete('/:id', rutasController.deleteRuta);
-
-// Buscar rutas (por conductor, vehículo, fecha)
-router.get('/rutas/search', rutasController.searchRutas);
 
 module.exports = router;

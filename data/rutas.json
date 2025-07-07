@@ -13,9 +13,16 @@
   },
   {
     "id": 3,
-    "conductor": "Santiago Perez",
-    "vehiculo": "XYZ-456",
-    "fecha": "2025-02-11",
+    "conductor": "Fabian Caro",
+    "vehiculo": "Mazda 5-2025",
+    "fecha": "2025-07-07",
+    "detalles": []
+  },
+  {
+    "id": 4,
+    "conductor": "Fabian Caro",
+    "vehiculo": "Mazda 5-2025",
+    "fecha": "2025-07-07",
     "detalles": []
   }
 ]
