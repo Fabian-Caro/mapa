@@ -3,27 +3,25 @@ document.addEventListener('DOMContentLoaded', function() {
     Components.init();
     
     // Estadísticas animadas
-    animateStats();
+    updateVehicleStats();
     
     // Efectos de parallax suaves
-    initScrollEffects();
+    //initScrollEffects();
 });
 
-function animateStats() {
-    const stats = document.querySelectorAll('.stat-number');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.getAttribute('data-target'));
-                animateNumber(entry.target, target);
-            }
-        });
-    });
+async function updateVehicleStats() {
+    try {
+        const response = await fetch('/api/vehicle/count');
+        const data = await response.json();
 
-    stats.forEach(stat => {
-        observer.observe(stat);
-    });
+        if (data.success) {
+            const vehicleStatElement = document.querySelector(".stat-number[data-type='vehicles']");
+            vehicleStatElement.setAttribute("data-target", data.count);
+            animateNumber(vehicleStatElement, data.count);
+        }
+    } catch (error) {
+        console.error("Error al obtener estadísticas:", error);
+    }
 }
 
 function animateNumber(element, target) {

@@ -158,11 +158,21 @@ function search(req, res) {
     }
 }
 
+function getCount(req, res) {
+    try {
+        const vehicles = VehicleModel.getAll();
+        res.json({ success: true, count: vehicles.length });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Error al obtener el conteo de vehículos"});
+    }
+}
+
 module.exports = {
     getAll,
     getByPlate,
     create,
     update,
     deleteVehicle,
-    search
+    search,
+    getCount
 };

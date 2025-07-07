@@ -10,7 +10,7 @@ const router = express.Router();
 // } = require('../../../controller/vehiculosController');
 
 const controller = require('./VehicleController');
-
+router.get('/count', controller.getCount);
 // Agrega el endpoint de búsqueda antes de la ruta dinámica
 router.get('/search', controller.search);
 
@@ -20,5 +20,6 @@ router.get('/:plate', controller.getByPlate);
 router.post('/', controller.create);
 router.put('/:plate', controller.update);
 router.delete('/:plate', controller.deleteVehicle);
+
 
 module.exports = router;

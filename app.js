@@ -13,14 +13,12 @@ app.use('/vehicle', express.static(path.join(__dirname, 'src', 'features', 'vehi
 
 // Importar rutas
 const vehicleRoutes = require('./src/features/vehicle/vehicleRoutes');
-//const vehiculosRoutes = require('./routes/vehiculosRoutes');
 const conductoresRoutes = require('./routes/conductoresRoutes');
 const rutasRoutes = require('./routes/rutasRoutes');
 const detallesRutaRoutes = require('./routes/detallesRutaRoutes');
 
 // Configurar rutas de la API
 app.use('/api/vehicle', vehicleRoutes);
-//app.use('/api/vehiculos', vehiculosRoutes);
 app.use('/api/conductores', conductoresRoutes);
 app.use('/api/rutas', rutasRoutes);
 app.use('/api/detalles-ruta', detallesRutaRoutes);
@@ -33,10 +31,6 @@ app.get('/', (req, res) => {
 app.get('/vehicle', (req, res) => {
     res.sendFile(path.join(__dirname, 'src', 'features', 'vehicle', 'index.html'));
 });
-
-// app.get('/vehiculos', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'public', 'vehiculos', 'index.html'));
-// });
 
 app.get('/conductores', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'conductores', 'index.html'));
