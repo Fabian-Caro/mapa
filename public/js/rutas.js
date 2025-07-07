@@ -185,7 +185,7 @@ document.getElementById('searchInput').addEventListener('input', function (e) {
     // Asume que hay un endpoint de búsqueda que maneja los parámetros
     const queryString = `?query=${encodeURIComponent(searchTerm)}`;
     fetch(`/api/rutas/search${queryString}`)
-        .then(response => response.json())  
+        .then(response => response.json())
         .then(result => {
             if (result.success) {
                 renderRutas(result.data);
@@ -207,6 +207,146 @@ document.getElementById('rutaModal').addEventListener('hidden.bs.modal', functio
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    //const conductorSelect = document.getElementById('conductorSelect');
+    const vehiculoSelect = document.getElementById('vehiculoSelect');
+    const rutaModal = document.getElementById('rutaModal');
+
+    // --- Funciones para interactuar con tu API REST ---
+
+    // Función para obtener todos los vehículos del backend
+    async function getAllVehiculosAPI() {
+        try {
+            const response = await fetch('/api/vehiculos'); // Tu ruta de API para vehículos
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            const result = await response.json();
+            if (result.success) {
+                return result.data; // Devuelve solo el array de vehículos
+            } else {
+                throw new Error('Error en la respuesta de la API de vehículos');
+            }
+        } catch (error) {
+            console.error('Error al obtener vehículos de la API:', error);
+            // Puedes mostrar un mensaje al usuario aquí, por ejemplo:
+            showAlert('No se pudieron cargar los vehículos: ' + error.message, 'error');
+            return []; // Retorna un array vacío para evitar errores posteriores
+        }
+    }
+
+    // Función para obtener todos los conductores del backend
+    async function getAllConductoresAPI() {
+        try {
+            // Asumiendo una estructura similar a la de vehículos para conductores
+            const response = await fetch('/api/conductores'); // Tu ruta de API para conductores
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            const result = await response.json();
+            if (result.success) {
+                return result.data; // Devuelve solo el array de conductores
+            } else {
+                throw new Error('Error en la respuesta de la API de conductores');
+            }
+        } catch (error) {
+            console.error('Error al obtener conductores de la API:', error);
+            // Puedes mostrar un mensaje al usuario aquí
+            return [];
+        }
+    }
+
+    // Función para obtener todas las rutas del backend
+    async function getAllRutasAPI() {
+        try {
+            const response = await fetch('/api/rutas'); // Tu ruta de API para vehículos
+            if (!response.ok) {
+                throw new Error(`Error HTTP: ${response.status}`);
+            }
+            const result = await response.json();
+            if (result.success) {
+                return result.data; // Devuelve solo el array de vehículos
+            } else {
+                throw new Error('Error en la respuesta de la API de rutas');
+            }
+        } catch (error) {
+            console.error('Error al obtener rutas de la API:', error);
+            // Puedes mostrar un mensaje al usuario aquí, por ejemplo:
+            showAlert('No se pudieron cargar las rutas: ' + error.message, 'error');
+            return []; // Retorna un array vacío para evitar errores posteriores
+        }
+    }
+
+    // --- Funciones para poblar los selectores ---
+
+    async function cargarConductoresEnSelector() {
+        // Limpiar opciones existentes (excepto la primera "Seleccione...")
+        conductorSelect.innerHTML = '<option value="" disabled selected>Seleccione un conductor</option>';
+        try {
+            const conductores = await getAllConductoresAPI();
+            conductores.forEach(conductor => {
+                const option = document.createElement('option');
+                // Asumiendo que tus conductores tienen un 'id' y un 'nombre'
+                option.value = `${conductor.nombres} ${conductor.apellidos}`; // Usa un ID único si lo tienes, o el nombre
+                option.textContent = `${conductor.nombres} ${conductor.apellidos}`; // Muestra el nombre
+                conductorSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error al cargar los conductores en el selector:', error);
+        }
+    }
+
+    async function cargarVehiculosEnSelector() {
+        // Limpiar opciones existentes (excepto la primera "Seleccione...")
+        vehiculoSelect.innerHTML = '<option value="" disabled selected>Seleccione un vehículo</option>';
+        try {
+            const vehiculos = await getAllVehiculosAPI();
+            vehiculos.forEach(vehiculo => {
+                const option = document.createElement('option');
+                // Usaremos la placa como valor único para el vehículo
+                option.value = vehiculo.placa;
+                option.textContent = `${vehiculo.placa} (${vehiculo.marca} ${vehiculo.modelo})`;
+                vehiculoSelect.appendChild(option);
+            });
+        } catch (error) {
+            console.error('Error al cargar los vehículos en el selector:', error);
+        }
+    }
+
+    async function cargarIdRutas() {
+        // Limpiar opciones existentes (excepto la primera "Seleccione...")
+        const inputId = document.querySelector('input[name="id"]');
+        try {
+            const rutas = await getAllRutasAPI();
+            const idRuta = rutas.length+1;
+            if (inputId) {
+                    inputId.value = idRuta;
+                } else {
+                    console.error("No se encontró el input con name='id'.");
+                }
+        } catch (error) {
+            console.error('Error al cargar los conductores en el selector:', error);
+        }
+    }
+
+    // --- Event Listener para cuando el modal se muestra ---
+
+    rutaModal.addEventListener('show.bs.modal', () => {
+        cargarConductoresEnSelector();
+        cargarVehiculosEnSelector();
+        cargarIdRutas();
+    });
+
+    // --- Validación del formulario (mantenemos la lógica de Bootstrap) ---
+
+    const rutaForm = document.getElementById('rutaForm');
+    rutaForm.addEventListener('submit', event => {
+        if (!rutaForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        rutaForm.classList.add('was-validated');
+    }, false);
+
     Components.init(); // carga header y footer
     fetchRutas();  // carga inicial de vehículos
 });

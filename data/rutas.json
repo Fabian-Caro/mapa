@@ -3,26 +3,28 @@
     "id": 1,
     "conductor": "Juan Perez",
     "vehiculo": "ABC-123",
-    "fecha": "2025-03-15"
+    "fecha": "2024-03-14",
+    "detalles": []
   },
   {
     "id": 2,
     "conductor": "Maria Gomez",
     "vehiculo": "XYZ-789",
-    "fecha": "2025-03-16"
+    "fecha": "2024-03-16",
+    "detalles": []
   },
   {
     "id": 3,
     "conductor": "Fabian Caro",
-    "vehiculo": "Mazda 5-2025",
-    "fecha": "2025-07-07",
+    "vehiculo": "Mazda 3-2023",
+    "fecha": "2024-07-07",
     "detalles": []
   },
   {
     "id": 4,
     "conductor": "Fabian Caro",
-    "vehiculo": "Mazda 5-2025",
-    "fecha": "2025-07-07",
+    "vehiculo": "Mazda 3-2023",
+    "fecha": "2024-07-07",
     "detalles": []
   }
 ]

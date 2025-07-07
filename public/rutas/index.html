@@ -59,7 +59,7 @@
                                 <label class="form-label">ID de Ruta</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-fingerprint"></i></span>
-                                    <input type="text" class="form-control" name="id" required>
+                                    <input type="text" class="form-control" name="id" value="" disabled>
                                 </div>
                                 <div class="invalid-feedback">El ID es requerido</div>
                             </div>
@@ -67,7 +67,9 @@
                                 <label class="form-label">Conductor</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                    <input type="text" class="form-control" name="conductor" required>
+                                    <select class="form-select" id="conductorSelect" name="conductor" required>
+                                        <option value="" disabled selected>Seleccione un conductor</option>
+                                    </select>
                                 </div>
                                 <div class="invalid-feedback">El conductor es requerido</div>
                             </div>
@@ -75,7 +77,9 @@
                                 <label class="form-label">Vehículo</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-truck"></i></span>
-                                    <input type="text" class="form-control" name="vehiculo" required>
+                                    <select class="form-select" id="vehiculoSelect" name="vehiculo" required>
+                                        <option value="" disabled selected>Seleccione un vehiculo</option>
+                                    </select>
                                 </div>
                                 <div class="invalid-feedback">El vehículo es requerido</div>
                             </div>
