@@ -4,9 +4,9 @@ const path = require('path');
 const filePath = path.join(__dirname, 'vehicleData.json');
 
 // Función para crear un nuevo objeto vehículo
-function crearVehiculo(placa, modelo, color, marca, capacidadCarga) {
+function create(plate, modelo, color, marca, capacidadCarga) {
     return {
-        placa,
+        plate,
         modelo,
         color,
         marca,
@@ -16,7 +16,7 @@ function crearVehiculo(placa, modelo, color, marca, capacidadCarga) {
 }
 
 // Función para obtener todos los vehículos
-function getVehiculos() {
+function getAll() {
     try {
         if (!fs.existsSync(filePath)) {
             fs.writeFileSync(filePath, '[]', 'utf-8');
@@ -31,7 +31,7 @@ function getVehiculos() {
 }
 
 // Función para guardar vehículos
-function saveVehiculos(vehiculos) {
+function save(vehiculos) {
     try {
         const dir = path.dirname(filePath);
         if (!fs.existsSync(dir)) {
@@ -46,7 +46,7 @@ function saveVehiculos(vehiculos) {
 }
 
 module.exports = {
-    crearVehiculo,
-    getVehiculos,
-    saveVehiculos
+    create,
+    getAll,
+    save
 };

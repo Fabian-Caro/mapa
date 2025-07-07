@@ -59,13 +59,13 @@ function renderVehiculos(vehiculos) {
             <div class="card mb-4">
               <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-truck"></i> ${vehiculo.marca} ${vehiculo.modelo}</h5>
-                <p class="card-text"><strong>Placa:</strong> ${vehiculo.placa}</p>
+                <p class="card-text"><strong>Placa:</strong> ${vehiculo.plate}</p>
                 <p class="card-text"><strong>Color:</strong> ${vehiculo.color}</p>
                 <p class="card-text"><strong>Capacidad de Carga:</strong> ${vehiculo.capacidadCarga || 'N/D'}</p>
                 <div class="btn-group">
                   <button class="btn btn-outline-info" onclick="showVehiculoDetails('${vehiculo.placa}')"><i class="fas fa-info-circle"></i> Detalles</button>
                   <button class="btn btn-outline-warning" onclick="editVehiculo('${vehiculo.placa}')"><i class="fas fa-edit"></i> Editar</button>
-                  <button class="btn btn-outline-danger" onclick="deleteVehiculo('${vehiculo.placa}')"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn btn-outline-danger" onclick="deleteVehicle('${vehiculo.plate}')"><i class="fas fa-trash"></i> Eliminar</button>
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@ function editVehiculo(placa) {
 }
 
 // Función para eliminar vehículo
-function deleteVehiculo(placa) {
+function deleteVehicle(plate) {
     Swal.fire({
         title: '¿Estás seguro?',
         text: "¡No podrás revertir esto!",
@@ -152,7 +152,7 @@ function deleteVehiculo(placa) {
         cancelButtonText: 'Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch(`/api/vehiculos/${placa}`, {
+            fetch(`/api/vehicle/${plate}`, {
                 method: 'DELETE'
             })
                 .then(response => {
