@@ -1,4 +1,4 @@
-const VehicleModel = require('./VehicleModel');
+const VehicleModel = require('./vehicleModel');
 
 // Obtener todos los vehículos
 function getAll(req, res) {
