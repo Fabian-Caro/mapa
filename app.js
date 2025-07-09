@@ -40,7 +40,7 @@ app.get('/rutas', (req, res) => {
 });
 
 app.get('/rutas/ruta', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'rutas', 'ruta.html'));
+    res.sendFile(path.join(__dirname, 'public', 'rutas', 'detalleRuta.html'));
 });
 
 // Middleware para manejar errores 404

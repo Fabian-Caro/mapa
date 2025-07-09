@@ -100,7 +100,6 @@ function deleteRuta(req, res) {
 }
 
 // Buscar rutas (por conductor, vehículo, fecha, e incluso por ID si se desea)
-// Buscar rutas (por conductor, vehículo, fecha, e incluso por ID si se desea)
 function searchRutas(req, res) {
     try {
         const rutas = rutasModel.getRutas();
